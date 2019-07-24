@@ -11,22 +11,32 @@ resource "aws_instance" "web-1" {
   tags = {
       Name= "qawebserver"
   }
-  /*
-  provisioner "remote-exec" {
-    inline = [
-      "sudo yum update -y"
-    ] 
+  
+  provisioner "remote-exec"  {
+    
+
     connection {
-      host = "${aws_instance.web-1.public_ip}"
-      private_key = "${var.key_name}"
-      port = 22
       type = "ssh"
-      user = "ec2-user"
-      password= ""
-      
-    } 
+      host = "${aws_instance.web-1.public_ip}"
+      user = "${var.ssh_user}"
+      port = "${var.ssh_port}"
+      private_key = "${file(var.key_path)}"
+      agent = true
+
+    }
+    inline = [
+      "echo hello aws!",
+    ]
+    
+   
+    
   }
-*/
+ provisioner "remote-exec"{
+      inline = [
+        "echo this works!",
+        "sudo yum update -y",
+      ]
+    }
   
 
 

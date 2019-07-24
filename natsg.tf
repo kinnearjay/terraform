@@ -28,7 +28,7 @@ resource "aws_security_group" "nat" {
       protocol = "icmp"
       cidr_blocks = ["0.0.0.0/0"] 
     }
-    vpc_id = "${aws_vpc.default.id}"
+    vpc_id = "${aws_vpc.defaultvpc.id}"
 
     tags={
         Name = "NATSGQA"
