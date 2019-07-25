@@ -25,18 +25,14 @@ resource "aws_instance" "web-1" {
 
     }
     inline = [
-      "echo hello aws!",
+      "sudo yum update -y",
+      "sudo yum -y install python-pip",
+      "sudo pip install ansible",
     ]
     
    
     
   }
- provisioner "remote-exec"{
-      inline = [
-        "echo this works!",
-        "sudo yum update -y",
-      ]
-    }
   
 
 
