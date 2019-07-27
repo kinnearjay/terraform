@@ -62,7 +62,8 @@ resource "aws_instance" "web-1" {
     }
     
     inline = [
-      "ansible-playbook main.yml"
+      "ansible-playbook main.yml",
+      "sudo cat /var/lib/jenkins/secrets/initialAdminPassword"
     ]
     
   }
