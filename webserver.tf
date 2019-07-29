@@ -28,11 +28,14 @@ resource "aws_instance" "web-1" {
       "sudo yum update -y",
       "sudo yum -y install python-pip",
       "sudo pip install ansible",
+      "sudo yum install -y git",
+      "git clone https://github.com/kinnearjay/ansible-roles.git"
     ]
     
    
     
   }
+  /*  obselete code
   provisioner "file"  {
     
     connection {
@@ -45,10 +48,11 @@ resource "aws_instance" "web-1" {
 
     }
     
-    source = "~/Documents/QAproject/ansible-stuff/main.yml"
+    source = "~/Documents/QAproject/ansible-stuff/installjenkins.yml"
     destination = "~/main.yml"
     
   }
+  */
     provisioner "remote-exec"  {
     
     connection {
@@ -62,7 +66,7 @@ resource "aws_instance" "web-1" {
     }
     
     inline = [
-      "ansible-playbook main.yml",
+      "ansible-playbook ansible-roles/installjenkins.yml",
       "sudo cat /var/lib/jenkins/secrets/initialAdminPassword"
     ]
     
